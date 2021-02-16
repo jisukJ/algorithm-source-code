@@ -30,12 +30,6 @@
     <ClCompile Include="bitmarsk_Eratosthenes.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="segmentTree_FAMILYTREE.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="segmentTree_FAMILYTREE_미완성.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DP_bitmas_GRADUATION.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -75,9 +69,6 @@
     <ClCompile Include="heap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Midpoint circle algorithm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Newtons sqrt.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -88,9 +79,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MO.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Qsort-perfect ver.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="persistent segment tree.cpp">
@@ -138,9 +126,6 @@
     <ClCompile Include="bishop.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="quick sort new ver.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Tree_fortress.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -169,9 +154,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="treap_검증완료.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="segmentTree_MORDOR.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="segmentTree.cpp">
@@ -205,6 +187,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="meetInTheMiddle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="quick_sort.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Midpoint_circle_algorithm.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

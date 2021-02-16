@@ -1,3 +1,8 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 void quicksort(vector<int>&arr, int left, int right) {
 	if (right - 1 <= left) {
 		return;
