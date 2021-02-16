@@ -15,6 +15,7 @@ int gcd1(int a, int b)
 		a = b;
 		b = n;
 	}
+	return a;
 }
 
 int gcd2(int a, int b)
