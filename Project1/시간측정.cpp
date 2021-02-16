@@ -152,6 +152,6 @@ int main() {
 	}
 	ed = clock();
 	cout << (double)(ed - st) / CLOCKS_PER_SEC << endl;
-	cout << "³¡";
+	cout << "END";
 }
 	//cout << (double)(ed-st) / CLOCKS_PER_SEC;
