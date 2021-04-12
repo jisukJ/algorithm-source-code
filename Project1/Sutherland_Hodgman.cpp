@@ -1,8 +1,7 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
-using namespace std;
-
+#include <algorithm>
+#include <cassert>
 using namespace std;
 
 const double EPSILON = 1e-9;
@@ -166,75 +165,56 @@ bool isInside(vector2 q, const polygon& p) {
 }
 
 
-//PINBALL
 int C, N;
-vector2 center[50];
-int radius[50];
+polygon input;
+vector2 map1, map2;
 
-vector<double> solve2(double a, double b, double c) {
-	double d = b * b - 4 * a * c;
-	if (d < -EPSILON) {
-		return vector<double>();
+polygon cutPoly(const polygon& p, const vector2& a, const vector2& b) {
+	int n = p.size();
+	vector<bool>inside(n);
+	for (int i = 0; i < n; ++i) {
+		inside[i] = ccw(a, b, p[i]) >= 0;
 	}
-	if (d < EPSILON) {
-		return vector<double>(1, -b / (2 * a));
+	polygon ret;
+	for (int i = 0; i < n; ++i) {
+		int j = (i + 1) % n;
+		if (inside[i]) {
+			ret.push_back(p[i]);
+		}
+		if (inside[i] != inside[j]) {
+			vector2 cross;
+			assert(lineIntersection(p[i], p[j], a, b, cross));
+			ret.push_back(cross);
+		}
 	}
-	vector<double>ret;
-	ret.push_back((-b - sqrt(d)) / (2 * a));
-	ret.push_back((-b + sqrt(d)) / (2 * a));
 	return ret;
 }
 
-double hitCircle(vector2 here, vector2 dir, vector2 center, int radius) {
-	double a = dir.dot(dir);
-	double b = 2 * dir.dot(here - center);
-	double c = center.dot(center) + here.dot(here) - 2 * here.dot(center) - radius * radius;
-	vector<double> sols = solve2(a, b, c);
-	if (sols.empty() || sols[0] < EPSILON) {
-		return INFTY;
-	}
-	return sols[0];
-}
-void simulate(vector2 here, vector2 dir) {
-	dir = dir.normalize();
-	int hitCount = 0;
-	while (hitCount < 100) {
-		int cir = -1;
-		double time = INFTY * 0.5;
-		for (int i = 0; i < N; ++i) {
-			double cand = hitCircle(here, dir, center[i], radius[i] + 1);
-			if (cand < time) {
-				time = cand;
-				cir = i;
-			}
-		}
-		if (cir == -1) {
-			break;
-		}
-		if (hitCount++) {
-			cout << " ";
-		}
-		cout << cir;
-		vector2 contact = here + dir * time;
-		dir = reflect(dir, center[cir], contact);
-		here = contact;
-	}
-	cout << endl;
+polygon sutherlandHodgman(const polygon& p, double x1, double y1, double x2, double y2) {
+	vector2 a(x1, y1), b(x2, y1), c(x2, y2), d(x1, y2);
+	polygon ret = cutPoly(p, a, b);
+	ret = cutPoly(ret, b, c);
+	ret = cutPoly(ret, c, d);
+	ret = cutPoly(ret, d, a);
+	return ret;
 }
 
 int main()
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
+	cout << fixed;
+	cout.precision(10);
 	cin >> C;
 	for (int test = 1; test <= C; ++test) {
-		double x, y, dx, dy;
-		cin >> x >> y >> dx >> dy >> N;
-		vector2 here(x, y);
-		vector2 dir(dx, dy);
+		input.clear();
+		cin >> map1.x >> map1.y >> map2.x >> map2.y >> N;
 		for (int i = 0; i < N; ++i) {
-			cin >> center[i].x >> center[i].y >> radius[i];
+			double x, y;
+			cin >> x >> y;
+			vector2 tmp(x, y);
+			input.push_back(tmp);
 		}
-		simulate(here, dir);
+		cout << area(sutherlandHodgman(input, map1.x, map1.y, map2.x, map2.y))<<"\n";
 	}
 }
